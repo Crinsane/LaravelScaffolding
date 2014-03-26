@@ -1,0 +1,68 @@
+<?php
+
+use Gloudemans\Scaffolding\Abstracts\BaseScenario;
+
+class {{singularUcfirst}}Scenario extends BaseScenario {
+
+	/**
+	 * {{singularUcfirst}} scenario constructor
+	 *
+	 * @param {{singularUcfirst}}   ${{singular}}
+	 */
+	public function __construct({{singularUcfirst}} ${{singular}})
+	{
+		$this->resource = ${{singular}};
+	}
+
+	/**
+	 * Validates the input and creates a new {{singular}}
+	 *
+	 * @param  array   $input
+	 * @return mixed
+	 */
+	public function create{{singularUcfirst}}($input)
+	{
+		$validation = $this->validator($input, $this->resource->rules);
+
+		if($validation->fails())
+			return $this->invoke('create{{singularUcfirst}}Failed', [$validation, $input]);
+
+		${{singular}} = $this->resource->create($input);
+
+		return $this->invoke('create{{singularUcfirst}}Success', [${{singular}}]);
+	}
+
+	/**
+	 * Validates the input and updates the {{singular}}
+	 *
+	 * @param  {{singularUcfirst}}    ${{singular}}
+	 * @param  array   $input
+	 * @return mixed
+	 */
+	public function update{{singularUcfirst}}(${{singular}}, $input)
+	{
+		$validation = $this->validator($input, $this->resource->rules);
+
+		if($validation->fails())
+			return $this->invoke('update{{singularUcfirst}}Failed', [$validation, $input, ${{singular}}]);
+
+		${{singular}}->update($input);
+
+		return $this->invoke('update{{singularUcfirst}}Success', [${{singular}}]);
+	}
+
+	/**
+	 * Deletes the {{singular}} from storage
+	 *
+	 * @param  {{singularUcfirst}}    ${{singular}}
+	 * @return mixed
+	 */
+	public function destroy{{singularUcfirst}}(${{singular}})
+	{
+		if( ! ${{singular}}->delete())
+			return $this->invoke('destroy{{singularUcfirst}}Failed', [${{singular}}->id]);
+
+		return $this->invoke('destroy{{singularUcfirst}}Success');
+	}
+
+}

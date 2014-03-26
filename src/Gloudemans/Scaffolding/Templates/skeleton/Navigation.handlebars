@@ -1,0 +1,21 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			\{{ link_to_route('home', 'Scaffolding', [], ['class' => 'navbar-brand']) }}
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li \{{ Request::is('/') ? 'class="active"' : '' }}>\{{ link_to_route('home', 'Home') }}</li>
+				@foreach(json_decode(File::get(storage_path().'/scaffold/scaffold.json')) as $key => $name)
+					<li \{{ Request::is($key . '*') ? 'class="active"' : '' }}>\{{ link_to_route($key . '.index', $name) }}</li>
+				@endforeach
+			</ul>
+		</div>
+	</div>
+</div>

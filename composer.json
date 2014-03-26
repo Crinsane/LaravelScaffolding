@@ -1,0 +1,24 @@
+{
+    "name": "gloudemans/scaffolding",
+    "description": "",
+    "authors": [
+        {
+            "name": "Rob Gloudemans",
+            "email": "Rob_Gloudemans@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~4",
+        "illuminate/session": "~4",
+        "illuminate/html": "~4",
+        "anahkiasen/html-object": "dev-master",
+        "xamin/handlebars.php": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Gloudemans\\Scaffolding": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

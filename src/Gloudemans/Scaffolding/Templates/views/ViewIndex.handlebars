@@ -1,0 +1,38 @@
+@extends('master')
+
+@section('content')
+
+	<h1 class="pageheader">
+		{{pluralUcfirst}}
+		<small>An overview of all {{plural}}</small>
+		\{{ link_to_route('{{singular}}.create', 'Create {{singularUcfirst}}', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;']) }}
+	</h1>
+	<hr>
+
+	@if(${{plural}}->isEmpty())
+
+		<div class="alert alert-info">
+			There are no {{plural}} yet.
+		</div>
+
+	@else
+
+		<table class="table table-stripped table-condensed">
+
+			@foreach(${{plural}} as ${{singular}})
+				<tr>
+					<td>\{{ ${{singular}}->id }}</td>
+					<td>\{{ ${{singular}}->firstname }}</td>
+					<td>\{{ ${{singular}}->lastname }}</td>
+					<td>\{{ ${{singular}}->editLink }}</td>
+					<td>\{{ ${{singular}}->destroyLink }}</td>
+				</tr>
+			@endforeach
+
+		</table>
+
+		\{{ ${{plural}}->links() }}
+
+	@endif
+
+@stop

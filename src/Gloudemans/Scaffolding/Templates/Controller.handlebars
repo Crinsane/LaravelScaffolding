@@ -1,0 +1,169 @@
+<?php
+
+class {{singularUcfirst}}Controller extends Controller {
+
+	/**
+	 * The {{singular}} scenario
+	 *
+	 * @var {{singularUcfirst}}Scenario
+	 */
+	protected $scenario;
+
+	/**
+	 * {{singularUcfirst}} controller constructor
+	 *
+	 * @param {{singularUcfirst}}Scenario    $scenario
+	 */
+	public function __construct({{singularUcfirst}}Scenario $scenario)
+	{
+		$this->scenario = $scenario;
+		$scenario->controller = $this;
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index()
+	{
+		${{plural}} = $this->scenario->getPaginated();
+
+		return View::make('{{singular}}.index', compact('{{plural}}'));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		${{singular}} = $this->scenario->emptyResource();
+
+		return View::make('{{singular}}.create', compact('{{singular}}'));
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  {{singularUcfirst}}  ${{singular}}
+	 * @return Response
+	 */
+	public function show(${{singular}})
+	{
+		return View::make('{{singular}}.show', compact('{{singular}}'));
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  {{singularUcfirst}}  ${{singular}}
+	 * @return Response
+	 */
+	public function edit(${{singular}})
+	{
+		return View::make('{{singular}}.edit', compact('{{singular}}'));
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
+		return $this->scenario->create{{singularUcfirst}}(Input::except(['_method', '_token']));
+	}
+
+	/**
+	 * Invoked when creating a {{singular}} failed
+	 *
+	 * @param  Illuminate\Validation\Validator   $validator
+	 * @param  array                             $input
+	 * @return Response
+	 */
+	protected function create{{singularUcfirst}}Failed($validator, $input)
+	{
+		return Redirect::route('{{singular}}.create')->withErrors($validator)->withInput($input);
+	}
+
+	/**
+	 * Invoked when creating a {{singular}} was successful
+	 *
+	 * @param  {{singularUcfirst}}  ${{singular}}
+	 * @return Response
+	 */
+	protected function create{{singularUcfirst}}Success(${{singular}})
+	{
+		return Redirect::route('{{singular}}.show', [${{singular}}->id])->with('success', 'The {{singular}} was succesfully created');
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  {{singularUcfirst}}  ${{singular}}
+	 * @return Response
+	 */
+	public function update(${{singular}})
+	{
+		return $this->scenario->update{{singularUcfirst}}(${{singular}}, Input::except(['_method', '_token']));
+	}
+
+	/**
+	 * Invoked when updating a {{singular}} failed
+	 *
+	 * @param  Illuminate\Validation\Validator   $validator
+	 * @param  array                             $input
+	 * @param  {{singularUcfirst}} 							 ${{singular}}
+	 * @return Response
+	 */
+	protected function update{{singularUcfirst}}Failed($validator, $input, ${{singular}})
+	{
+		return Redirect::route('{{singular}}.edit', [${{singular}}->getKey()])->withErrors($validator)->withInput($input);
+	}
+
+	/**
+	 * Invoked when updating a {{singular}} succesful
+	 *
+	 * @param  {{singularUcfirst}}  ${{singular}}
+	 * @return Response
+	 */
+	protected function update{{singularUcfirst}}Success(${{singular}})
+	{
+		return Redirect::route('{{singular}}.show', [${{singular}}->getKey()])->with('success', 'The {{singular}} was succesfully updated');
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  {{singularUcfirst}}  ${{singular}}
+	 * @return Response
+	 */
+	public function destroy(${{singular}})
+	{
+		return $this->scenario->destroy{{singularUcfirst}}(${{singular}});
+	}
+
+	/**
+	 * Invoked when destroying a {{singular}} failed
+	 *
+	 * @param  {{singularUcfirst}}  ${{singular}}
+	 * @return Response
+	 */
+	protected function destroy{{singularUcfirst}}Failed(${{singular}})
+	{
+		return Redirect::route('{{singular}}.show', [${{singular}}->getKey()])->with('error', 'An error occurred while deleting the {{singular}}.');
+	}
+
+	/**
+	 * Invoked when destroying a {{singular}} successful
+	 *
+	 * @return Response
+	 */
+	protected function destroy{{singularUcfirst}}Success()
+	{
+		return Redirect::route('{{singular}}.index')->with('info', 'The {{singular}} was succesfully deleted');
+	}
+
+}

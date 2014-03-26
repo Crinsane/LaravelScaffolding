@@ -1,0 +1,97 @@
+<?php
+
+{{#if auth}}
+use Illuminate\Auth\UserInterface;
+{{/if}}
+{{#if traits}}{{#each traits}}
+use {{this.namespace}};
+{{/each}}{{/if}}
+
+class {{name}} extends \Eloquent{{#if auth}} implements UserInterface{{/if}} {
+
+	{{#if traits}}
+	use {{#each traits}}{{this.name}}{{#unless @last}}, {{/unless}}{{/each}};
+	{{/if}}
+
+	/**
+	 * The database table used by the model.
+	 *
+	 * @var string
+	 */
+	protected $table = '{{table}}';
+
+	/**
+	 * The attributes that are mass assignable.
+	 *
+	 * @var array
+	 */
+	protected $fillable = [{{#each fillable}}'{{this}}'{{#unless @last}}, {{/unless}}{{/each}}];
+
+	{{#if primaryKey}}
+	/**
+	 * The primary key for the model.
+	 *
+	 * @var string
+	 */
+	protected $primaryKey = '{{primaryKey}}';
+
+	{{/if}}
+	{{#if softdeletes}}
+	/**
+	 * Indicates if the model should soft delete.
+	 *
+	 * @var bool
+	 */
+	protected $softDelete = true;
+
+	{{/if}}
+	{{#unless timestamps}}
+	/**
+	 * Indicates if the model should be timestamped.
+	 *
+	 * @var bool
+	 */
+	public $timestamps = false;
+
+	{{/unless}}
+	/**
+	 * Validation rules for the model
+	 *
+	 * @var array
+	 */
+	public $rules = [
+	{{#each rules}}
+		'{{@key}}' => [{{#each this}}'{{this}}'{{#unless @last}}, {{/unless}}{{/each}}],
+	{{/each}}
+	];
+
+	{{#each relations.has_many}}
+	public function {{this.entity}}()
+	{
+		return $this->hasMany('{{this.entity}}'{{#if this.key}}, '{{this.key}}'{{/if}});
+	}
+
+	{{/each}}
+
+	{{#if auth}}
+	/**
+	 * Get the unique identifier for the user.
+	 *
+	 * @return mixed
+	 */
+	public function getAuthIdentifier()
+	{
+		return $this->getKey();
+	}
+
+	/**
+	 * Get the password for the user.
+	 *
+	 * @return string
+	 */
+	public function getAuthPassword()
+	{
+		return $this->password;
+	}
+	{{/if}}
+}

@@ -1,0 +1,22 @@
+@extends('master')
+
+@section('content')
+
+@foreach(json_decode(File::get(storage_path().'/scaffold/scaffold.json')) as $key => $name)
+
+<div class="col-md-4">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">\{{ $name }}</h3>
+		</div>
+		<div class="panel-body">
+			Work with the entity \{{ $name }}
+			<br><br>
+			\{{ link_to_route($key . '.index', 'Go to overview &rarr;', [], ['class' => 'btn btn-primary btn-large']) }}
+		</div>
+	</div>
+</div>
+
+@endforeach
+
+@stop

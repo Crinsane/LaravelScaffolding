@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class Create{{pluralUcfirst}}Table extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+        Schema::create('{{table}}', function(Blueprint $table)
+        {
+            {{#each attributes}}
+            $table->{{this.type}}({{#if this.name}}'{{this.name}}'{{/if}}){{#if this.nullable}}->nullable(){{/if}};
+            {{/each}}
+        });
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+	    Schema::drop('{{table}}');
+	}
+
+}

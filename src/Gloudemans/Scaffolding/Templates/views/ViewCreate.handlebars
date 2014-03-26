@@ -1,0 +1,14 @@
+@extends('master')
+
+@section('content')
+
+	<h1 class="pageheader">
+		{{pluralUcfirst}}
+		<small>Create a new {{singular}}</small>
+		\{{ link_to_route('{{singular}}.index', 'Back to overview', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;']) }}
+	</h1>
+	<hr>
+
+	\{{ Scaffold::form('store', ${{singular}}) }}
+
+@stop

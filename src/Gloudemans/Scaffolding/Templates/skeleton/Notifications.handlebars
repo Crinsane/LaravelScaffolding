@@ -1,0 +1,10 @@
+@foreach(['success', 'info', 'warning', 'danger'] as $type)
+
+	@if(Session::has($type))
+		<div class="alert alert-\{{ $type }} alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			\{{ Session::get($type) }}
+		</div>
+	@endif
+
+@endforeach

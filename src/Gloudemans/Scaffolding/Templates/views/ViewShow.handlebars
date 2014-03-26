@@ -1,0 +1,18 @@
+@extends('master')
+
+@section('content')
+
+	<h1 class="pageheader">
+		{{pluralUcfirst}}
+		<small>Details of {{singular}}</small>
+		\{{ link_to_route('{{singular}}.index', 'Back to overview', [], ['class' => 'btn btn-info pull-right', 'style' => 'margin-top:10px;']) }}
+		\{{ Form::open(['route' => ['{{singular}}.destroy', ${{singular}}->id], 'method' => 'delete', 'class' => 'pull-right', 'style' => 'margin-top:2px;margin-right:10px;']) }}
+			\{{ Form::button('Delete {{singularUcfirst}}', ['type' => 'submit', 'class' => 'btn btn-danger']) }}
+		\{{ Form::close() }}
+		\{{ link_to_route('{{singular}}.edit', 'Edit {{singularUcfirst}}', [${{singular}}->id], ['class' => 'btn btn-primary pull-right', 'style' => 'margin-top:10px;margin-right:10px;']) }}
+	</h1>
+	<hr>
+
+	\{{ var_dump(${{singular}}->toArray()) }}
+
+@stop
