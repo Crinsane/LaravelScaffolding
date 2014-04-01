@@ -12,7 +12,7 @@
         "illuminate/support": "~4",
         "illuminate/session": "~4",
         "illuminate/html": "~4",
-        "anahkiasen/html-object": "dev-master",
+        "anahkiasen/html-object": "1.4.0",
         "xamin/handlebars.php": "dev-master"
     },
     "autoload": {
